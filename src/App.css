@@ -1,0 +1,19 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.container {
+  padding: 15px;
+}
+
+.logo {
+  display: block;
+}
+
+.nav-links a {
+  margin-right: 10px;
+}
