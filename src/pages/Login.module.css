@@ -1,0 +1,202 @@
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 22px;
+  color: var(--muted);
+  font: 600 10px/1.4 var(--sans);
+  letter-spacing: 1.35px;
+  text-transform: uppercase;
+}
+.eyebrow > span {
+  width: 22px;
+  height: 1px;
+  background: var(--lime);
+}
+.login-aside h1 {
+  margin: 0;
+  color: var(--white);
+  font: 400 clamp(44px, 6.1vw, 78px)/0.98 var(--serif);
+}
+.button {
+  min-height: 46px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  border: 1px solid transparent;
+  font: 600 11px/1 var(--sans);
+  letter-spacing: 0.45px;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
+}
+.button:hover {
+  transform: translateY(-2px);
+}
+.button--lime {
+  color: #122018;
+  background: var(--lime);
+}
+.button--lime:hover {
+  background: #c3f7ab;
+}
+.button--outline {
+  color: var(--white);
+  border-color: rgba(220, 234, 219, 0.35);
+  background: transparent;
+}
+.button--outline:hover {
+  border-color: var(--lime);
+  color: var(--lime);
+}
+.section-wrap {
+  width: min(1100px, 78%);
+  margin: 0 auto;
+}
+.account {
+  min-height: 620px;
+  padding: 78px 0 100px;
+}
+.login-layout {
+  min-height: 540px;
+  display: grid;
+  grid-template-columns: 1fr minmax(330px, 0.8fr);
+  gap: 8%;
+  align-items: center;
+}
+.login-aside {
+  min-height: 400px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+}
+.login-aside h1 {
+  font-size: clamp(42px, 5vw, 60px);
+}
+.login-aside > p:not(.eyebrow) {
+  max-width: 300px;
+  margin: 16px 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.login-aside__quote {
+  max-width: 270px;
+  margin-top: 36px;
+  color: #d4ded5;
+  font: italic 20px/1.4 var(--serif);
+}
+.login-aside__icon {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  color: rgba(174, 238, 145, 0.45);
+}
+@media (max-width: 900px) {
+  .section-wrap {
+    width: 86%;
+  }
+  .login-layout {
+    gap: 5%;
+    grid-template-columns: 1fr minmax(310px, 0.9fr);
+  }
+}
+@media (max-width: 640px) {
+  .section-wrap {
+    width: 84%;
+  }
+  .account {
+    min-height: 0;
+    padding: 85px 0 70px;
+  }
+  .login-layout {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+  .login-aside {
+    min-height: 185px;
+  }
+  .login-aside h1 {
+    font-size: 42px;
+  }
+  .login-aside > p:not(.eyebrow) {
+    margin: 9px 0;
+    font-size: 11px;
+  }
+  .login-aside__quote,
+  .login-aside__icon {
+    display: none;
+  }
+}
+.account--login {
+  width: 100%;
+  min-height: calc(100svh - var(--header-height));
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  margin: 0;
+  padding: 58px 24px 280px;
+  background: url('/mountain-train.svg') center bottom / 100% auto no-repeat;
+}
+.account--login::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 250px;
+  left: 0;
+  width: clamp(140px, 16vw, 240px);
+  background: url('/edge-botanical.svg') left top / contain no-repeat;
+  pointer-events: none;
+}
+.account--login::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 250px;
+  right: 0;
+  width: clamp(160px, 19vw, 290px);
+  background: url('/edge-botanical-right.svg') right top / contain no-repeat;
+  pointer-events: none;
+}
+.login-layout {
+  width: min(720px, 100%);
+  min-height: 0;
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+.login-aside {
+  display: none;
+}
+@media (max-width: 640px) {
+  .account--login {
+    min-height: calc(100svh - var(--header-height));
+    padding: 40px 18px 190px;
+    background-size: 100% auto;
+  }
+  .account--login::before {
+    bottom: 200px;
+    width: clamp(50px, 15vw, 90px);
+    opacity: 0.65;
+  }
+  .account--login::after {
+    bottom: 200px;
+    width: clamp(60px, 18vw, 110px);
+    opacity: 0.65;
+  }
+}

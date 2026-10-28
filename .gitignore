@@ -19,6 +19,7 @@ cypress/screenshots
 .vscode/*
 !.vscode/extensions.json
 .idea
+.mcp.json
 .DS_Store
 *.suo
 *.ntvs*
