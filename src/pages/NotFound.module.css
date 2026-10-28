@@ -1,5 +1,5 @@
 .page {
-  min-height: calc(100vh - 100px); /* мінус висота хедера, підлаштуй */
+  min-height: calc(100vh - 100px); 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,7 +37,7 @@
 
 .code {
   margin: 0;
-  font-family: 'Playfair Display', serif; /* той самий шрифт, що в заголовках */
+  font-family: 'Playfair Display', serif; 
   font-size: clamp(96px, 18vw, 180px);
   line-height: 1;
   font-weight: 400;
