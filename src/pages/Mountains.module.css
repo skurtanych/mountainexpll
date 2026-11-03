@@ -13,31 +13,59 @@
   height: 1px;
   background: var(--lime);
 }
-.hero .eyebrow {
-  color: #d4ded5;
-}
 .catalog__heading h1 {
   margin: 0;
   color: var(--white);
   font: 400 clamp(44px, 6.1vw, 78px)/0.98 var(--serif);
 }
+.button {
+  min-height: 46px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  border: 1px solid transparent;
+  font: 600 11px/1 var(--sans);
+  letter-spacing: 0.45px;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
+}
+.button:hover {
+  transform: translateY(-2px);
+}
+.button--lime {
+  color: #122018;
+  background: var(--lime);
+}
+.button--lime:hover {
+  background: #c3f7ab;
+}
+.button--outline {
+  color: var(--white);
+  border-color: rgba(220, 234, 219, 0.35);
+  background: transparent;
+}
+.button--outline:hover {
+  border-color: var(--lime);
+  color: var(--lime);
+}
 .section-wrap {
   width: min(1100px, 78%);
   margin: 0 auto;
-}
-.section-heading p:not(.eyebrow) {
-  margin: 0;
-  color: var(--muted);
-  font-size: 12px;
-}
-.section-heading .eyebrow {
-  margin-bottom: 14px;
 }
 .mountain-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: 24px;
   row-gap: 42px;
+}
+.mountain-grid--featured {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .catalog {
   padding: 86px 0 120px;
@@ -72,16 +100,6 @@
   color: var(--lime);
   font: 400 36px/1 var(--serif);
 }
-.login-aside > p:not(.eyebrow) {
-  max-width: 300px;
-  margin: 16px 0;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.7;
-}
-.mountain-modal__content .eyebrow {
-  margin-bottom: 14px;
-}
 @media (max-width: 900px) {
   .section-wrap {
     width: 86%;
@@ -91,7 +109,8 @@
   .section-wrap {
     width: 84%;
   }
-  .mountain-grid {
+  .mountain-grid,
+  .mountain-grid--featured {
     grid-template-columns: 1fr;
     row-gap: 30px;
   }
@@ -117,13 +136,6 @@
   .catalog__count span {
     font-size: 8px;
   }
-  .login-aside > p:not(.eyebrow) {
-    margin: 9px 0;
-    font-size: 11px;
-  }
-}
-.hero .eyebrow {
-  display: none;
 }
 .catalog {
   width: 88%;
@@ -140,9 +152,6 @@
 .mountain-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 72px 48px;
-}
-.mountain-modal__content .eyebrow {
-  display: none;
 }
 
 @media (max-width: 900px) {
@@ -162,263 +171,27 @@
   }
 }
 
-@keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Пошук і фільтр */
+.filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 40px;
 }
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.filters input,
+.filters select {
+  height: 52px;
+  padding: 0 18px;
+  color: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #0b1711;
+  font: 14px var(--sans);
 }
-@keyframes hero-reveal {
-  from {
-    transform: scale(1.035);
-    filter: brightness(0.7);
-  }
-  to {
-    transform: scale(1);
-    filter: brightness(1);
-  }
+.filters input {
+  flex: 1;
 }
-
-@keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes hero-reveal {
-  from {
-    transform: scale(1.035);
-    filter: brightness(0.7);
-  }
-  to {
-    transform: scale(1);
-    filter: brightness(1);
-  }
-}
-
-@keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes hero-reveal {
-  from {
-    transform: scale(1.035);
-    filter: brightness(0.7);
-  }
-  to {
-    transform: scale(1);
-    filter: brightness(1);
-  }
-}
-
-@keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes hero-reveal {
-  from {
-    transform: scale(1.035);
-    filter: brightness(0.7);
-  }
-  to {
-    transform: scale(1);
-    filter: brightness(1);
-  }
-}
-
-@keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes hero-reveal {
-  from {
-    transform: scale(1.035);
-    filter: brightness(0.7);
-  }
-  to {
-    transform: scale(1);
-    filter: brightness(1);
-  }
-}
-
-@keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes hero-reveal {
-  from {
-    transform: scale(1.035);
-    filter: brightness(0.7);
-  }
-  to {
-    transform: scale(1);
-    filter: brightness(1);
-  }
-}
-
-@keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes hero-reveal {
-  from {
-    transform: scale(1.035);
-    filter: brightness(0.7);
-  }
-  to {
-    transform: scale(1);
-    filter: brightness(1);
-  }
-}
-
-@keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes hero-reveal {
-  from {
-    transform: scale(1.035);
-    filter: brightness(0.7);
-  }
-  to {
-    transform: scale(1);
-    filter: brightness(1);
-  }
-}
-
-@keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes hero-reveal {
-  from {
-    transform: scale(1.035);
-    filter: brightness(0.7);
-  }
-  to {
-    transform: scale(1);
-    filter: brightness(1);
+@media (max-width: 640px) {
+  .filters {
+    flex-direction: column;
   }
 }
