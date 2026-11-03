@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react'
 import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router'
 import styles from './App.module.css'
+import { API_URL } from './api/config'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import MountainModal from './components/MountainModal'
+import ProtectedRoute from './components/ProtectedRoute'
 import { copy } from './data/copy'
-import { demoBookings } from './data/demoBookings'
-import { mountains } from './data/mountains'
+import { useAuth } from './hooks/useAuth'
+import { useFetch } from './hooks/useFetch'
+import { useMutation } from './hooks/useMutation'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Mountains from './pages/Mountains'
 import NotFound from './pages/NotFound'
 import Profile from './pages/Profile'
-
-const demoUser = { email: 'traveler@mountains.ua', name: 'traveler' }
 
 function App() {
   const navigate = useNavigate()
@@ -22,6 +23,16 @@ function App() {
   const [selectedMountain, setSelectedMountain] = useState(null)
   const [notice, setNotice] = useState('')
   const t = copy[language]
+
+  const { user, login } = useAuth()
+  const { mutate } = useMutation()
+  const mountainsQuery = useFetch(`${API_URL}/mountains`)
+  const mountains = mountainsQuery.data ?? []
+  const status = {
+    loading: mountainsQuery.loading,
+    error: mountainsQuery.error,
+    refetch: mountainsQuery.refetch,
+  }
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -46,14 +57,33 @@ function App() {
     navigate(`/${nextPage}`)
   }
 
-  function handleBooking() {
+  async function handleBooking(mountain, date) {
     setSelectedMountain(null)
-    goTo('login')
+    if (!user) {
+      goTo('login')
+      return
+    }
+    try {
+      await mutate(`${API_URL}/bookings`, {
+        body: { userId: user.id, mountain: mountain.id, date, status: 'pending' },
+      })
+      setNotice(language === 'ua' ? 'Заявку створено' : 'Booking created')
+      navigate('/profile')
+    } catch {
+      setNotice(language === 'ua' ? 'Не вдалося створити заявку' : 'Booking failed')
+    }
   }
 
-  function handleSignIn(event) {
+  async function handleSignIn(event) {
     event.preventDefault()
-    setNotice(t.authUnavailable)
+    const form = new FormData(event.currentTarget)
+    try {
+      await login(form.get('email'), form.get('password'))
+      setNotice('')
+      navigate('/profile')
+    } catch {
+      setNotice(t.emailError)
+    }
   }
 
   const isLogin = pathname === '/login'
@@ -82,6 +112,7 @@ function App() {
             element={
               <Mountains
                 mountains={mountains}
+                status={status}
                 language={language}
                 t={t}
                 onSelect={setSelectedMountain}
@@ -92,16 +123,15 @@ function App() {
           <Route
             path="/profile"
             element={
-              <Profile
-                user={demoUser}
-                bookings={demoBookings}
-                mountains={mountains}
-                language={language}
-                t={t}
-                notice=""
-                goTo={goTo}
-                onSignOut={() => goTo('login')}
-              />
+              <ProtectedRoute>
+                <Profile
+                  mountains={mountains}
+                  language={language}
+                  t={t}
+                  notice={notice}
+                  goTo={goTo}
+                />
+              </ProtectedRoute>
             }
           />
           <Route path="*" element={<NotFound />} />
@@ -111,10 +141,11 @@ function App() {
       {!isLogin && <Footer t={t} />}
 
       <MountainModal
+        key={selectedMountain?.id}
         mountain={selectedMountain}
         language={language}
         t={t}
-        user={null}
+        user={user}
         onBook={handleBooking}
         onClose={() => setSelectedMountain(null)}
       />

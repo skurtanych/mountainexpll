@@ -15,7 +15,8 @@
     "test:e2e": "start-server-and-test dev:e2e http://127.0.0.1:4174 cypress:run",
     "cypress:run": "cypress run",
     "preview": "vite preview",
-    "prepare": "husky"
+    "prepare": "husky",
+    "server": "json-server --watch db.json --port 3001"
   },
   "dependencies": {
     "lucide-react": "^1.52.0",
@@ -38,6 +39,7 @@
     "globals": "^17.13.0",
     "husky": "^9.1.7",
     "jsdom": "^29.1.1",
+    "json-server": "^0.17.4",
     "lint-staged": "^17.6.0",
     "prettier": "^3.9.9",
     "start-server-and-test": "^3.0.12",

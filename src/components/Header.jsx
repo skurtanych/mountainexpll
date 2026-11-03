@@ -2,6 +2,7 @@ import { Languages, MountainSnow, UserRound } from 'lucide-react'
 import { Link, NavLink } from 'react-router'
 import styles from './Header.module.css'
 import { classNames } from '../classNames'
+import { useAuth } from '../hooks/useAuth'
 
 const navItems = [
   { to: '/home', label: 'Home' },
@@ -9,6 +10,9 @@ const navItems = [
 ]
 
 export default function Header({ language, setLanguage, onNavigate, t }) {
+  const { user } = useAuth()
+  const profilePath = user ? '/profile' : '/login'
+
   return (
     <header className={classNames(styles, 'site-header')}>
       <Link
@@ -46,11 +50,11 @@ export default function Header({ language, setLanguage, onNavigate, t }) {
           <Languages size={16} />
           <span>{language.toUpperCase()}</span>
         </button>
-        <Link to="/login" className={classNames(styles, 'profile-link')} onClick={onNavigate}>
+        <Link to={profilePath} className={classNames(styles, 'profile-link')} onClick={onNavigate}>
           Profile
         </Link>
         <Link
-          to="/login"
+          to={profilePath}
           className={classNames(styles, 'profile-shortcut')}
           onClick={onNavigate}
           aria-label="Profile"

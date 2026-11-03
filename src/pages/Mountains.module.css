@@ -170,3 +170,28 @@
     gap: 22px 14px;
   }
 }
+
+/* Пошук і фільтр */
+.filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+.filters input,
+.filters select {
+  height: 52px;
+  padding: 0 18px;
+  color: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #0b1711;
+  font: 14px var(--sans);
+}
+.filters input {
+  flex: 1;
+}
+@media (max-width: 640px) {
+  .filters {
+    flex-direction: column;
+  }
+}

@@ -289,3 +289,29 @@
     font-size: 10px;
   }
 }
+.mountain-modal__date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 22px;
+  padding: 0 18px;
+}
+.mountain-modal__date label {
+  color: var(--muted);
+  font-size: 14px;
+}
+.mountain-modal__date input {
+  height: 44px;
+  padding: 0 12px;
+  color: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #0b1711;
+  font: 14px var(--sans);
+  color-scheme: dark;
+}
+.mountain-modal__book:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

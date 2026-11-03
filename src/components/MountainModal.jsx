@@ -1,9 +1,21 @@
+import { useState } from 'react'
 import { ArrowRight, CalendarDays, MapPin, Mountain, MountainSnow, X } from 'lucide-react'
 import styles from './MountainModal.module.css'
 import { classNames } from '../classNames'
 
+function dateInDays(days) {
+  const date = new Date()
+  date.setDate(date.getDate() + days)
+  return date.toISOString().slice(0, 10)
+}
+
 export default function MountainModal({ mountain, language, t, user, onBook, onClose }) {
+  const [minDate] = useState(() => dateInDays(1))
+  const [date, setDate] = useState(() => dateInDays(14))
+
   if (!mountain) return null
+
+  const canBook = !user || (date && date >= minDate)
 
   return (
     <div
@@ -62,10 +74,26 @@ export default function MountainModal({ mountain, language, t, user, onBook, onC
               <strong>{mountain.season[language]}</strong>
             </div>
           </div>
+
+          {user && (
+            <div className={classNames(styles, 'mountain-modal__date')}>
+              <label htmlFor="departure-date">{t.departure}</label>
+              <input
+                id="departure-date"
+                type="date"
+                lang="en"
+                value={date}
+                min={minDate}
+                onChange={(event) => setDate(event.target.value)}
+              />
+            </div>
+          )}
+
           <button
             className={classNames(styles, 'button', 'button--lime', 'mountain-modal__book')}
             type="button"
-            onClick={() => onBook(mountain)}
+            disabled={!canBook}
+            onClick={() => onBook(mountain, date)}
           >
             {user ? t.book : t.loginToBook}
             <ArrowRight size={17} />
