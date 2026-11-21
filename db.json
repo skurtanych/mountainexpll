@@ -206,23 +206,22 @@
       "id": 1,
       "name": "Traveler",
       "email": "traveler@mountains.ua",
-      "password": "mountainpass"
+      "password": "$2b$10$STYn9keveqjuiHq84S1fZeVkk5nbLclRTH8wUFs/dGMOR9x9XQV7O"
+    },
+    {
+      "id": 2,
+      "name": "sasha",
+      "email": "sasha@student.ua",
+      "password": "$2b$10$P0VEimnQzeixgny/xzYQa.goInjjcMECElzibwlz9LqIb0vd8DeoK"
     }
   ],
   "bookings": [
     {
-      "userId": 1,
-      "mountain": "pip-ivan",
-      "date": "2026-11-14",
-      "status": "pending",
-      "id": 1
-    },
-    {
-      "userId": 1,
+      "id": 1,
+      "userId": 2,
       "mountain": "brebeneskul",
-      "date": "2026-11-26",
-      "status": "pending",
-      "id": 2
+      "date": "2026-12-04",
+      "status": "pending"
     }
   ]
 }
