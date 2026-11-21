@@ -1,0 +1,17 @@
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 60px 0;
+  color: var(--muted);
+  text-align: center;
+}
+.state button {
+  padding: 10px 20px;
+  color: #07130b;
+  border: 0;
+  border-radius: 999px;
+  background: var(--lime);
+  cursor: pointer;
+}

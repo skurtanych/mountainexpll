@@ -15,12 +15,18 @@
     "test:e2e": "start-server-and-test dev:e2e http://127.0.0.1:4174 cypress:run",
     "cypress:run": "cypress run",
     "preview": "vite preview",
-    "prepare": "husky"
+    "prepare": "husky",
+    "api": "node --watch server/index.js"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
+    "jsonwebtoken": "^9.0.3",
     "lucide-react": "^1.52.0",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-dom": "^19.2.8",
+    "react-router": "^7.18.4"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -37,6 +43,7 @@
     "globals": "^17.13.0",
     "husky": "^9.1.7",
     "jsdom": "^29.1.1",
+    "json-server": "^0.17.4",
     "lint-staged": "^17.6.0",
     "prettier": "^3.9.9",
     "start-server-and-test": "^3.0.12",
