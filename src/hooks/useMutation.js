@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { authHeaders } from '../api/token'
 
 export function useMutation() {
   const [loading, setLoading] = useState(false)
@@ -10,11 +11,12 @@ export function useMutation() {
     try {
       const res = await fetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...authHeaders() },
         body: body ? JSON.stringify(body) : undefined,
       })
-      if (!res.ok) throw new Error(`HTTP ${res.status}`)
-      return await res.json()
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok) throw new Error(data.message ?? `HTTP ${res.status}`)
+      return data
     } catch (err) {
       setError(err.message)
       throw err

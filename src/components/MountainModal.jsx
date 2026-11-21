@@ -9,7 +9,7 @@ function dateInDays(days) {
   return date.toISOString().slice(0, 10)
 }
 
-export default function MountainModal({ mountain, language, t, user, onBook, onClose }) {
+export default function MountainModal({ mountain, language, t, user, error, onBook, onClose }) {
   const [minDate] = useState(() => dateInDays(1))
   const [date, setDate] = useState(() => dateInDays(14))
 
@@ -88,7 +88,11 @@ export default function MountainModal({ mountain, language, t, user, onBook, onC
               />
             </div>
           )}
-
+          {error && (
+            <p className={classNames(styles, 'mountain-modal__error')} role="alert">
+              {error}
+            </p>
+          )}
           <button
             className={classNames(styles, 'button', 'button--lime', 'mountain-modal__book')}
             type="button"

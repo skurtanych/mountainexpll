@@ -23,7 +23,7 @@ export default function Footer({ t }) {
           <span>Email</span>
           <strong>info@mountains.ua</strong>
         </a>
-        <a href="https://instagram.com" target="_blank" rel="noreferrer">
+        <a href="https://www.instagram.com/?hl=uk" target="_blank" rel="noreferrer">
           <AtSign size={15} />
           <span>{t.social}</span>
           <strong>Instagram | Facebook</strong>

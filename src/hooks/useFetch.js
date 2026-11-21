@@ -1,3 +1,4 @@
+import { authHeaders } from '../api/token'
 import { useEffect, useState } from 'react'
 
 export function useFetch(url) {
@@ -8,7 +9,7 @@ export function useFetch(url) {
     if (!url) return undefined
     const controller = new AbortController()
 
-    fetch(url, { method: 'GET', signal: controller.signal })
+    fetch(url, { method: 'GET', headers: authHeaders(), signal: controller.signal })
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
         return res.json()

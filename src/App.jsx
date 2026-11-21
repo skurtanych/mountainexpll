@@ -22,6 +22,7 @@ function App() {
   const [language, setLanguage] = useState('ua')
   const [selectedMountain, setSelectedMountain] = useState(null)
   const [notice, setNotice] = useState('')
+  const [bookingError, setBookingError] = useState('')
   const t = copy[language]
 
   const { user, login } = useAuth()
@@ -41,7 +42,10 @@ function App() {
   useEffect(() => {
     if (!selectedMountain) return undefined
     const handleEscape = (event) => {
-      if (event.key === 'Escape') setSelectedMountain(null)
+      if (event.key === 'Escape') {
+        setSelectedMountain(null)
+        setBookingError('')
+      }
     }
     window.addEventListener('keydown', handleEscape)
     return () => window.removeEventListener('keydown', handleEscape)
@@ -49,6 +53,7 @@ function App() {
 
   function resetView() {
     setNotice('')
+    setBookingError('')
     setSelectedMountain(null)
   }
 
@@ -58,19 +63,33 @@ function App() {
   }
 
   async function handleBooking(mountain, date) {
-    setSelectedMountain(null)
     if (!user) {
       goTo('login')
       return
     }
+    setBookingError('')
     try {
       await mutate(`${API_URL}/bookings`, {
-        body: { userId: user.id, mountain: mountain.id, date, status: 'pending' },
+        body: { mountain: mountain.id, date },
       })
+      setSelectedMountain(null)
       setNotice(language === 'ua' ? 'Заявку створено' : 'Booking created')
       navigate('/profile')
-    } catch {
-      setNotice(language === 'ua' ? 'Не вдалося створити заявку' : 'Booking failed')
+    } catch (err) {
+      const isDuplicate = err.message.includes('already booked')
+      if (language === 'ua') {
+        setBookingError(
+          isDuplicate
+            ? 'Ви вже забронювали цю гору на цю дату. Оберіть іншу дату.'
+            : 'Не вдалося створити заявку. Спробуй ще раз.',
+        )
+      } else {
+        setBookingError(
+          isDuplicate
+            ? 'You already booked this mountain for this date. Choose another date.'
+            : 'Booking failed. Please try again.',
+        )
+      }
     }
   }
 
@@ -146,8 +165,12 @@ function App() {
         language={language}
         t={t}
         user={user}
+        error={bookingError}
         onBook={handleBooking}
-        onClose={() => setSelectedMountain(null)}
+        onClose={() => {
+          setSelectedMountain(null)
+          setBookingError('')
+        }}
       />
     </div>
   )
