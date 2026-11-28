@@ -1,0 +1,76 @@
+export const t = {
+  loginTitle: 'Вхід',
+  loginSubtitle: 'Увійдіть в акаунт',
+  email: 'Email',
+  password: 'Пароль',
+  signIn: 'Увійти',
+  demoNote: 'Демо-акаунт',
+  emailError: 'Невірний email',
+  discover: 'Дізнатися більше',
+  close: 'Закрити',
+  altitude: 'Висота',
+  location: 'Розташування',
+  difficulty: 'Складність',
+  bestSeason: 'Найкращий сезон',
+  departure: 'Дата відправлення',
+  book: 'Забронювати',
+  loginToBook: 'Увійдіть, щоб забронювати',
+  contact: 'Зв’яжіться з нами',
+  phone: 'Телефон',
+  social: 'Соцмережі',
+  language: 'Змінити мову',
+  heroTagline: 'Збирай моменти',
+  highPoint: 'Найвища точка',
+  routes: 'Маршрутів',
+  season: 'Сезон',
+  mountains: 'Гори',
+  featured: 'Обрані вершини',
+  featuredText: 'Найпопулярніші маршрути',
+  allMountains: 'Усі гори',
+  profile: 'Профіль',
+  signInTitle: 'Ласкаво просимо',
+  signInSubtitle: 'Увійдіть, щоб бронювати',
+  catalogTitle: 'Каталог гір',
+  catalogText: 'Оберіть свою вершину',
+  accountTitle: 'Особистий кабінет',
+  accountSubtitle: 'Історія пригод',
+  signOut: 'Вийти з акаунту',
+  bookings: 'Історія бронювань',
+  expedition: 'Експедиція',
+  status: 'Статус',
+  pending: 'В обробці',
+  confirmed: 'Підтверджено',
+  complete: 'Завершено',
+  noBookings: 'Бронювань поки немає',
+  firstVisit: 'Забронювати першу експедицію',
+}
+
+export const mountain = {
+  id: 'hoverla',
+  image: 'https://example.com/hoverla.jpg',
+  altitude: '2 061 м',
+  name: { ua: 'Говерла', en: 'Hoverla' },
+  range: {
+    ua: 'Чорногора · Івано-Франківська область',
+    en: 'Chornohora · Ivano-Frankivsk Oblast',
+  },
+  difficulty: { ua: 'Середня', en: 'Moderate' },
+  description: { ua: 'Найвища вершина України.', en: 'Ukraine’s highest summit.' },
+  season: { ua: 'Травень — жовтень', en: 'May — October' },
+}
+
+function make(id, ua, en, diffUa, diffEn) {
+  return {
+    ...mountain,
+    id,
+    name: { ua, en },
+    difficulty: { ua: diffUa, en: diffEn },
+  }
+}
+
+export const mountains = [
+  make('hoverla', 'Говерла', 'Hoverla', 'Середня', 'Moderate'),
+  make('pip-ivan', 'Піп Іван', 'Pip Ivan', 'Складна', 'Challenging'),
+  make('petros', 'Петрос', 'Petros', 'Середня', 'Moderate'),
+  make('brebeneskul', 'Бребенескул', 'Brebeneskul', 'Складна', 'Challenging'),
+]
