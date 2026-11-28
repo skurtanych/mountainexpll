@@ -1,34 +1,42 @@
 import { Languages, MountainSnow, UserRound } from 'lucide-react'
+import { Link, NavLink } from 'react-router'
 import styles from './Header.module.css'
 import { classNames } from '../classNames'
+import { useAuth } from '../hooks/useAuth'
 
-export default function Header({ page, language, setLanguage, goTo, t }) {
+const navItems = [
+  { to: '/home', label: 'Home' },
+  { to: '/mountains', label: 'Mountains' },
+]
+
+export default function Header({ language, setLanguage, onNavigate, t }) {
+  const { user } = useAuth()
+  const profilePath = user ? '/profile' : '/login'
+
   return (
     <header className={classNames(styles, 'site-header')}>
-      <button
+      <Link
+        to="/home"
         className={classNames(styles, 'brand')}
-        type="button"
-        onClick={() => goTo('home')}
+        onClick={onNavigate}
         aria-label="Home"
       >
         <span className={classNames(styles, 'brand__mark')}>
           <MountainSnow size={24} strokeWidth={1.7} />
         </span>
-      </button>
+      </Link>
       <nav className={classNames(styles, 'main-nav')} aria-label="Main navigation">
-        {[
-          { item: 'home', label: 'Home' },
-          { item: 'mountains', label: 'Mountains' },
-        ].map(({ item, label }) => (
-          <button
-            className={classNames(styles, 'main-nav__link', page === item && 'is-active')}
-            type="button"
-            key={item}
-            onClick={() => goTo(item)}
-            aria-current={page === item ? 'page' : undefined}
+        {navItems.map(({ to, label }) => (
+          <NavLink
+            key={to}
+            to={to}
+            onClick={onNavigate}
+            className={({ isActive }) =>
+              classNames(styles, 'main-nav__link', isActive && 'is-active')
+            }
           >
             {label}
-          </button>
+          </NavLink>
         ))}
       </nav>
       <div className={classNames(styles, 'header-tools')}>
@@ -42,21 +50,17 @@ export default function Header({ page, language, setLanguage, goTo, t }) {
           <Languages size={16} />
           <span>{language.toUpperCase()}</span>
         </button>
-        <button
-          className={classNames(styles, 'profile-link')}
-          type="button"
-          onClick={() => goTo('login')}
-        >
+        <Link to={profilePath} className={classNames(styles, 'profile-link')} onClick={onNavigate}>
           Profile
-        </button>
-        <button
+        </Link>
+        <Link
+          to={profilePath}
           className={classNames(styles, 'profile-shortcut')}
-          type="button"
-          onClick={() => goTo('login')}
+          onClick={onNavigate}
           aria-label="Profile"
         >
           <UserRound size={19} />
-        </button>
+        </Link>
       </div>
     </header>
   )

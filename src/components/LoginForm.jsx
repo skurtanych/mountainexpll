@@ -10,7 +10,14 @@ export default function LoginForm({ t, notice, onSubmit }) {
       </div>
       <h1>{t.loginTitle}</h1>
       <p>{t.loginSubtitle}</p>
-      {notice && <p className={classNames(styles, 'notice')}>{notice}</p>}
+      {notice && (
+        <div
+          className={classNames(styles, 'notice', notice === t.emailError && 'notice--error')}
+          role="status"
+        >
+          {notice}
+        </div>
+      )}
       <label htmlFor="email">{t.email}</label>
       <input
         id="email"
@@ -19,6 +26,7 @@ export default function LoginForm({ t, notice, onSubmit }) {
         autoComplete="email"
         placeholder="traveler@mountains.ua"
         defaultValue="traveler@mountains.ua"
+        required
       />
       <label htmlFor="password">{t.password}</label>
       <input
@@ -26,8 +34,10 @@ export default function LoginForm({ t, notice, onSubmit }) {
         name="password"
         type="password"
         autoComplete="current-password"
+        minLength="6"
         placeholder="••••••••"
         defaultValue="mountainpass"
+        required
       />
       <button
         className={classNames(styles, 'button', 'button--lime', 'login-form__submit')}
@@ -36,6 +46,7 @@ export default function LoginForm({ t, notice, onSubmit }) {
         {t.signIn}
         <ArrowRight size={17} />
       </button>
+      <p className={classNames(styles, 'login-form__note')}>{t.demoNote}</p>
     </form>
   )
 }

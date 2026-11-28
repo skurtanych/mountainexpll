@@ -1,4 +1,4 @@
-import { ArrowDownRight, ArrowRight, Mountain, MountainSnow } from 'lucide-react'
+import { ArrowRight, Mountain, MountainSnow } from 'lucide-react'
 import styles from './MountainCard.module.css'
 import { classNames } from '../classNames'
 
@@ -7,6 +7,7 @@ export default function MountainCard({ mountain, index, language, t, onSelect })
     <article className={classNames(styles, 'mountain-card')} style={{ '--card-order': index }}>
       <button
         className={classNames(styles, 'mountain-card__image')}
+        data-testid="mountain-card-image"
         type="button"
         style={{ backgroundImage: `url("${mountain.image}")` }}
         onClick={() => onSelect(mountain)}
@@ -14,7 +15,6 @@ export default function MountainCard({ mountain, index, language, t, onSelect })
       >
         <span className={classNames(styles, 'mountain-card__height')}>
           <Mountain size={14} /> {mountain.altitude}
-          <ArrowDownRight size={20} />
         </span>
       </button>
       <div className={classNames(styles, 'mountain-card__body')}>
