@@ -218,9 +218,9 @@
   "bookings": [
     {
       "id": 1,
-      "userId": 2,
-      "mountain": "brebeneskul",
-      "date": "2026-12-04",
+      "userId": 1,
+      "mountain": "hoverla",
+      "date": "2026-12-12",
       "status": "pending"
     }
   ]
